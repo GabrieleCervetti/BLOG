@@ -1,187 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notizie dal mondo del calcio</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/indexStyle.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Il mio Blog</title>
 </head>
 
 <body>
 
-    <header>
+	<nav class="navbar navbar-expand-lg sticky-top px-3 navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				</button>
+				<a class="navbar-brand text-white" href="#">Il mio Blog</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">Link 1</a></li>
+					<li><a href="#">Link 2</a></li>
+					<li><a href="#">Link 3</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#newPostModal" id="insertPostButton">
+					Aggiungi un articolo
+					</button>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-        <!-- contenuto header -->
+	<div class="container">
+		<div class="row" id="postsRow">
+			<div class="col-md-12 col-sm-6 px-2 my-1" id="postContainer" style="display: none;">
+				<div class="card h-100" id="post-card">
+					<div class="card-header">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="collapse navbar-collapse">
-
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="">Link</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a href="">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="">Link</a>
-                    </li>
-
-                </ul>
-
-
-
-            </div>
-
-
-
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newPostModal">
-                Add post
-            </button>
-
-        </nav>
-    </header>
-
-    <section class="container">
-
-        <div class="row" id="postsRow">
-            <div class="col-md-12 col-sm-6 px-2 my-1" id="postContainer" style="display: none;">
-
-                <div class="card" id="first-article">
-
-                    <header class="card-header"></header>
-
-                    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-
-                    <article class="card-body">
+                    </div>
+					<article class="card-body">
                         <h5 class="card-title"></h5>
                         <p class="card-text">
                         </p>
-
                     </article>
-                    <footer class="p-2 text-right">
+					<!--<footer class="p-2 text-right">
+						<a href="#" class="card-link" id="editPost">edit</a>
+						<div class="commentSection" style="display: none;">
+							<div class="form-group">
+								<h3>Commenta l'articolo: </h3>
+								<label for="formGroupExampleInput">Nome</label>
+								<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome">
+							</div>
+							<div class="form-group">
+								<label for="formGroupExampleInput2">Commento</label>
+								<input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Commenta..."
+								size="100">
+							</div>
+							<button id="comment" class="btn btn-primary">Commenta</button>
 
-                        <a href="#" class="card-link" id="editPost">edit</a>
-                        <!-- <div class="input-group mb-3">
-                            <input type="text" class="form-control comment-text" placeholder="Commenta"
-                                aria-label="Commenta" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary send-comment" type="button">invia</button>
-                            </div>
-                        </div> -->
-
-                        <ul class="list-group list-group-flush comments-container">
-                            <!-- add dinamically 
-                                <li class="list-group-item">Comment text</li>
-    
-                                -->
+							<h4>Commenti: </h4>
+							<ul class="list-group list-group-flush comments-container">
+							</ul>
+						</div>
+						<ul class="list-group list-group-flush comments-container">
                         </ul>
+					</footer>-->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="newPostModal" tabindex="-1" role="dialog" aria-labelledby="newPostModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="newPostModalLabel">Nuovo Articolo</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<!--New article title-->
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">Titolo</span>
+						</div>
+						<input type="text" id="postTitle" class="form-control" placeholder="Titolo"	aria-label="title" aria-describedby="basic-addon1">
+					</div>
+					<!--Article Body-->
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Corpo Articolo</span>
+						</div>
+						<textarea id="postBody" class="form-control" placeholder="Scrivi..." aria-label="With textarea"></textarea>
+					</div>
+					<div class="form-check">
+						<input type="checkbox" class="custom-control-input" id="publicCheck">
+						<label class="custom-control-label" for="publicCheck">Public</label>
+						<br>
 
-                    </footer>
-
-                </div>
-
-            </div>
-
-
-
-
-
-        </div>
-
-
-
-
-    </section>
-
-    <footer>
-
-
-    </footer>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="newPostModal" tabindex="-1" role="dialog" aria-labelledby="newPostModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newPostModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    
-
-                    <form>
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                              <input type="text" class="form-control" id="postTitle" placeholder="inserisci il titolo">
-                              <textarea class="form-control" placeholder="inserisci il testo" id="postBody" rows="4"></textarea>
-                            
-                              
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="publicCheck">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        public 
-                                    </label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="featuredCheck">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        featured 
-                                    </label>
-                                </div>
-
-
-                            </div>
-
-                                
-                              
-                        </div>
-
-                        
-
-
-                    </form>
-
-
-
+					</div>
+					<div class="form-check">
+						<input type="checkbox" class="custom-control-input" id="featuredCheck">
+						<label class="custom-control-label" for="featuredCheck">Featured</label>
+					</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" id="savePostBtn" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                    <button type="button" id="savePostBtn" class="btn btn-primary">Pubblica</button>
                 </div>
             </div>
         </div>
     </div>
+	<!--End Modal-->
+	
+	<footer>
+		<!--<div class="jumbotron text-center" style="margin-bottom:0">
+		<p>Made by Gabriele Cervetti</p>
+		</div>-->
+	</footer>
 
-
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="app/models/Post.js"></script>
-    <script src = "app/services/restController.js"></script>
-    <script src="app/controllers/index.js"></script>
-    <script src="js/_main.js"></script>
-
-
-
-
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="app/models/Post.js"></script>
+    <script type="text/javascript" src="app/services/restController.js"></script>
+    <script type="text/javascript" src="app/controllers/index.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 
 </body>
 

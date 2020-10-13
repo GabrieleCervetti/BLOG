@@ -1,9 +1,10 @@
-function Post(id,title,body,public,featured){
-    this.id = id;
-    this.title = title;
-    this.body = body;
-    this.public = public;
-    this.featured = featured;
-    this.tag = [];
-    
+class Post {
+    constructor(titleText, bodyText, pub, featured, tag) {
+		//this.id = id;
+        this.title = titleText;
+        this.body = bodyText;
+        this.public = pub;
+        this.featured = featured;
+        this.tag = tag;
+    }
 }

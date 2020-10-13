@@ -1,66 +1,58 @@
 class PostController{
-
-
+	
     constructor(){
         this.posts = [];
         this.restController = new RestController();
         //UI
+		this.commentContainer;
         this.postsContainer;							//contenitore principale
         this.postContainer;								//contenitore del singolo post
         this.modal;
         this.openModalBtn;
         this.modalTitle;
-        this.modalDescription;
+        this.modalText;
         this.modalPublicCheck;
-        this.addPostBtn;
+		this.modalFeaturedCheck;
+        this.savePostBtn;
+		this.tag;
 
-        this.editMode = false;
-        this.editedPostId = null;
-        this.editedPost = null;
+        //this.editMode = false;
+        //this.editedPostId = null;
+        //this.editedPost = null;
 
-
-    }
-    
-    init() {
-        $(document).ready(function (){
-            this.postsRow = $("#postsRow");
+	}
+	
+	init() {
+        $(document).ready(function () {
+			//this.postsRow = $("#postsRow");
+            this.commentContainer = $(".comments-container");
             this.postContainer = $("#postContainer");
-            this.modal = $("#newPostModal");
             this.modalTitle = $("#postTitle");
-            this.modalBody = $("#postBody");
-            this.modalCheck = $("#publicCheck");
-            this.addPostBtn = $("#savePostBtn");
-            this.addPostBtn = $("#savePostBtn");
-            
-            this.addPostBtn.click(function(){
+            this.modalText = $("#postBody");
+            this.modalPublicCheck = $("#publicCheck");
+            this.modalFeaturedCheck = $("#featuredCheck");
+            this.savePostBtn = $("#savePostBtn");
+            this.tag = ["", ""];
 
-                if(editMode){
-                    //
-                    this.updatePost(editedPost);
+            //Post insert
+            $("#savePostBtn").click(function () {
 
-
-                }else{
-
-                    var post = new Post(
-                        this.modalTitle.val(),
-                        this.modalBody.val(),
-                        this.modalCheck.is(":checked"),
-                        false
-                    );
-                    this.newPost(post);
-
-
-                }
-              
+                let Ps = new Post(this.modalTitle.val(),
+                    this.modalText.val(),
+                    this.modalPublicCheck.is(':checked'),
+                    this.modalFeaturedCheck.is(':checked'),
+                    this.tag
+                );
+                this.addUIPost(Ps);
+                this.postPosts(Ps);
                 this.closeModal();
-                this.resetModal();
-
             }.bind(this));
 
-
+            for (let i in posts) {
+                this.addUIPost(posts[i]);
+            }
             this.getPosts();
-
-           
+            //this.deletePost();
 
 
         }.bind(this));
@@ -68,103 +60,62 @@ class PostController{
     }
 
 
-    updatePost(post){
-        //call the rest controller
-
-        this.restController.updatePost("https://texty-89895.firebaseio.com/posts/" + post.id + ".json",
-            function(){
-                this.closeModal();
-                this.resetModal();
-                //update UI 
-                editMode = false;
-                editedPost = null;
-
-            }.bind(this)
-        )
-
-
-    }
-
-
-
-    getPosts() {
-
-        this.restController.get("https://texty-89895.firebaseio.com/posts.json",function(data,status,xhr){
-                for(var id in data){
-                    var post = data[id];
-                    post.id = id;
-                    if(post.public === true){
-                        this.createUIPost(post);
-                    }
-                }
-        }.bind(this));
-
-        
-    }
-
-    newPost(post){
-        //api call
-        var data = {
-            "title":post.title,
-            "body": post.body,
-            "featured": post.featured,
-            "public": post.public,
-            "tag": [
-                "notizie",
-                "covid"
-            ]
-
-        }
-
-
-        this.restController.post("https://texty-89895.firebaseio.com/posts.json",data,function(){
-            this.createUIPost(post);
-
-        }.bind(this));
-
-    }
-
-
-    createUIPost(post){
+    addUIPost(postPost) {
+        //add a post
         var postContainer = $("#postContainer").clone();
-        postContainer.css("display","block");
-        postContainer.attr("id","");
-        postContainer.addClass("class","postContainer");
-    
+        postContainer.css("display", "block");
+        postContainer.attr("id", "");
+        postContainer.addClass("class", "postContainer");
+
         var postHeader = postContainer.find(".card-header");
         var postBody = postContainer.find(".card-text");
-    
-        postHeader.html(post.title);
-        postBody.html(post.body);
 
-        postContainer.find("#editPost").click(function(){
-                this.editMode = true;
-                this.editedPost = post;
-                this.openModal(post);
-
-        }.bind(this));
-    
+        postHeader.html(postPost.title);
+        postBody.html(postPost.body + "<br>Tag: " + postPost.tag);
         $("#postsRow").append(postContainer);
-    
+
     }
 
     closeModal() {
-        this.modal.modal('hide');
+        $("#newPostModal").modal("hide");
     }
 
 
-    openModal(post) {
-        console.log(post);
-        this.modal.modal('show');
-        
+    getPosts() {
+        this.restController.get("http://localhost:3000/posts", function (data, status, xhr) {
+            let jsonPost = [];
+            for (var i in data) {
+                var post = data[i];
+                if (post.public) {
+                    if (post.featured) {
+                        this.addUIPost(post);
+                    } else {
+                        jsonPost.push(post);
+                    }
+                }
+            }
+            for (let j in jsonPost) {
+                this.addUIPost(jsonPost[j]);
+            }
+        }.bind(this))
     }
 
 
-    resetModal() {
-        this.modalTitle.val("");
-        this.modalBody.val("");
-
+    postPosts(data) {
+        this.restController.post("http://localhost:3000/posts", data, function () {
+            console.log(data);
+        }.bind(this))
     }
 
-    
+    deletePost() {
+        this.restController.delete(`http://localhost:3000/posts/` + `-MJ7lGD4Sr2e1IIYzQ7n` + `.json`, function () {
+
+        }.bind(this))
+    }
+
+    putArticles(data) {
+        this.restController.put("http://localhost:3000/posts", data, function () {
+
+        }.bind(this))
+    }
 }
